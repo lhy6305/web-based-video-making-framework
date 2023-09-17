@@ -1,0 +1,5 @@
+{
+    "name": "",
+    "main": "index.html",
+    "chromium-args": "--disable-cookie-encryption --disable-raf-throttling --disable-transparency --mixed-context --disable-web-security --allow-file-access-from-files --single-process --disable-gpu1 --force-cpu-draw1"
+}
