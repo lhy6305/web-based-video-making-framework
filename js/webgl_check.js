@@ -23,7 +23,7 @@ window.alert("脚本 webgl_check.js 错误：scriptManager.loadjs 未定义");
 return;
 }
 
-scriptManager.loadjs(window.suppgl?"./js/libpixi_v655gl.min.js":"./js/libpixi_v655lg.min.js");
+scriptManager.loadjs(window.suppgl?"./js/libpixi_v7240gl.min.js":"./js/libpixi_v7240lg.min.js");
 var itv=window.setInterval(function(){
 if(scriptManager.isDone()){
 scriptManager.loadjs("./js/timeline.js");
