@@ -11,6 +11,19 @@ return [ch/eh*ew,ch,(cw-ch/eh*ew)/2,0];
 }
 };
 
+util.encodeHtmlSpecChars=function(html){
+var elem=document.createElement("div");
+var txt=document.createTextNode(html);
+elem.appendChild(txt);
+return elem.innerHTML;
+};
+
+util.decodeHtmlSpecChars=function(str){
+var elem=document.createElement("div");
+elem.innerHTML=str;
+return elem.innerText||elem.textContent;
+};
+
 (function(){ //ticker-logic
 util.ticker={};
 util.ticker.started=false;
