@@ -24,6 +24,16 @@ elem.innerHTML=str;
 return elem.innerText||elem.textContent;
 };
 
+util.initFont=function(name){
+var elem=document.createElement("div");
+elem.style.fontFamily=name;
+elem.innerHTML=String(Math.random());
+document.body.appendChild(elem);
+setTimeout(function(){
+document.body.removeChild(elem);
+},0);
+};
+
 (function(){ //ticker-logic
 util.ticker={};
 util.ticker.started=false;
