@@ -32,6 +32,7 @@ timeline.reset();
 
 timeline.play=function(name){
 var code=util.getfile("./timeline/"+name+".js");
+code=code.toString("utf-8");
 if(code===false){
 console.error("timeline file \"./timeline/"+name+".js\" cannot be loaded.");
 return false;

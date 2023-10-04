@@ -127,7 +127,6 @@ return false;
 }
 try{
 var xhr=new XMLHttpRequest();
-xhr.overrideMimeType("text/plain; charset=x-user-defined");
 xhr.open("GET",pth,false);
 xhr.send();
 }catch(e){
@@ -137,7 +136,7 @@ return false;
 if(xhr===null){
 return false;
 }
-return xhr.responseText;
+return Buffer.from(xhr.response);
 };
 
 util.getjson=function(pth){ //return=(object)||false
