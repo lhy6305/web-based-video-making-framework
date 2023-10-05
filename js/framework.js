@@ -74,7 +74,8 @@ scene.shapes=[];
 
 scene.loadShape=function(name){
 var code=util.getfile("./shape/"+name+".js");
-if(code===false){
+code=code.toString("utf-8");
+if(code===false||strlen(code)<=0){
 console.error("shape file \"./shape/"+name+".js\" cannot be loaded.");
 return false;
 }

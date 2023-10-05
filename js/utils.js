@@ -141,6 +141,7 @@ return Buffer.from(xhr.response);
 
 util.getjson=function(pth){ //return=(object)||false
 var txt=util.getfile(pth);
+txt=txt.toString("utf-8");
 try{
 txt=JSON.parse(txt);
 }catch(e){
