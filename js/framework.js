@@ -185,7 +185,7 @@ elem.style.width=width+"%";
 elem.style.height=height+"%";
 elem.style.position="absolute";
 elem.style.display="inline-block";
-elem.zIndex=-1;
+elem.style.zIndex=-1;
 elem.destroy=function(){
 elem.parentNode.removeChild(elem);
 elem=null;
