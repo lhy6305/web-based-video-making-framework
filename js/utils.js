@@ -154,60 +154,53 @@ return false;
 return txt;
 };
 
-util.addTransition=function(obj,key,from,to,time,x0,y0,x1,y1){
+util.addTransition=function(obj,key,from,to,time,ease_func){ //return=(function)||false
 if(arguments.length<5||!(key in obj)){
-console.error("util.transition: invalid parameters found");
+console.error("util.addTransition: invalid parameters");
 return false;
 }
 if(arguments.length<=5){
-x0=0.5;
-y0=0.5;
-x1=0.5;
-y1=0.5;
+ease_func=bezier(0.5,0.5,0.5,0.5);
 }
 from=Number(from);
 to=Number(to);
 time=Number(time);
-x0=Number(x0);
-y0=Number(y0);
-x1=Number(x1);
-y1=Number(y1);
-if(isNaN(from)||isNaN(to)||isNaN(time)||isNaN(x0)||isNaN(y0)||isNaN(x1)||isNaN(y1)){
-console.error("util.transition: error parsing arguments of cubic-bezier control points");
+if(isNaN(from)||isNaN(to)||isNaN(time)){
+console.error("util.addTransition: error parsing arguments of cubic-bezier control points");
 return false;
 }
 obj[key]=from;
-var bz=bezier(x0,y0,x1,y1);
-var func=function(t){
+var tick_func=function(t){
 t/=1000;
 if(t<0){
 return;
 }
 if(t>time){
-util.ticker.remove(func);
+util.ticker.remove(tick_func);
 try{
 obj[key]=to;
 }catch(e){
-console.warn("util.transition: cannot set attribute of object");
-util.ticker.remove(func);
+console.warn("util.addTransition: cannot set attribute of object");
+util.ticker.remove(tick_func);
 return;
 }
 return;
 }
 try{
 if(to>from){
-obj[key]=(to-from)/time*bz(t);
+obj[key]=(to-from)/time*ease_func(t);
 }else{
-obj[key]=from-(from-to)/time*bz(t);
+obj[key]=from-(from-to)/time*ease_func(t);
 }
 }catch(e){
-console.warn("util.transition: cannot set attribute of object");
-util.ticker.remove(func);
+console.warn("util.addTransition: cannot set attribute of object");
+util.ticker.remove(tick_func);
 return;
 }
 };
-//util.ticker.add(func);
-util.ticker.add(func,true);
+util.ticker.add(tick_func);
+//util.ticker.add(tick_func,true);
+return tick_func;
 };
 
 window.util=util;
