@@ -76,6 +76,12 @@ return true;
 };
 
 util.ticker.remove=function(func){ //return=(boolean)is_success
+for(var a=0;a<util.transition_list.length;a++){
+if(util.transition_list[a]==func){
+util.transition_list.splice(a,1);
+break;
+}
+}
 for(var a=0;a<util.ticker.nrlist.length;a++){
 if(util.ticker.nrlist[a].func==func){
 util.ticker.nrlist.splice(a,1);
@@ -210,8 +216,8 @@ return tick_func;
 
 util.endAllTransitions=function(){
 var l=util.transition_list.length;
-for(var a=0;a<l;a++){
-util.transition_list[a](Infinity);
+for(var a=l-1;a>=0&&util.transition_list.length>0;a--){
+util.transition_list[0](Infinity);
 }
 return l-util.transition_list.length;
 };
