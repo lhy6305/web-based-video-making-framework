@@ -66,8 +66,11 @@ timeline.starttime=performance.now();
 var len;
 do{
 len=timeline.code.length;
-timeline.code=timeline.code.replace(new RegExp("[\r\n]","g"),"\n");
-timeline.code=timeline.code.replace(new RegExp("\n\n","g"),"\n");
+timeline.code=timeline.code.replace(new RegExp("\r\n","g"),"\n");
+}while(len!=timeline.code.length);
+do{
+len=timeline.code.length;
+timeline.code=timeline.code.replace(new RegExp("\r","g"),"\n");
 }while(len!=timeline.code.length);
 timeline.code=timeline.code.split("\n");
 timeline.started=true;
