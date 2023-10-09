@@ -154,6 +154,8 @@ return false;
 return txt;
 };
 
+util.transition_list=[];
+
 util.addTransition=function(obj,key,from,to,time,ease_func){ //return=(function)||false
 if(arguments.length<5||!(key in obj)){
 console.error("util.addTransition: invalid parameters");
@@ -171,11 +173,13 @@ return false;
 }
 obj[key]=from;
 var tick_func=function(t){
+if(Number.isFinite(t)){
 t/=1000;
 if(t<0){
 return;
 }
-if(t>time){
+}
+if((!Number.isFinite(t))||t>time){
 util.ticker.remove(tick_func);
 try{
 obj[key]=to;
@@ -199,9 +203,17 @@ return;
 }
 };
 util.ticker.add(tick_func);
+util.transition_list.push(tick_func);
 //util.ticker.add(tick_func,true);
 return tick_func;
 };
+
+util.endAllTransitions=function(){
+for(var a=0;a<util.transition_list.length;a++){
+util.transition_list[a](Infinity);
+}
+};
+
 
 window.util=util;
 })();
