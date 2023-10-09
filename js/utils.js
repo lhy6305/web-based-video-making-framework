@@ -209,9 +209,11 @@ return tick_func;
 };
 
 util.endAllTransitions=function(){
-for(var a=0;a<util.transition_list.length;a++){
+var l=util.transition_list.length;
+for(var a=0;a<l;a++){
 util.transition_list[a](Infinity);
 }
+return l-util.transition_list.length;
 };
 
 
